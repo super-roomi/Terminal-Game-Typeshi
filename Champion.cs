@@ -36,16 +36,29 @@ namespace projects_and
             this.npc = npc;
         }
 
-        public void Attack()
+        public void Attack(Champion champ, Npc npc)
         {
-            System.Console.WriteLine("You dealt: " + this.attackDmg + "\nHis/her health is now: " + (this.attackDmg - (npc.Armor * 0.3) - npc.Health));
+            npc.Health = npc.Health - champ.AttackDmg;
+            System.Console.WriteLine("You dealt: " + champ.attackDmg + "\nHis/her health is now: " + npc.Health);
         }
 
+        //Stat printing
         public void DisplayStats()
         {
             System.Console.WriteLine("Name: " + Name + "\nAttack Damage: " + AttackDmg + "\nHealth: " + Health + "\nMana: " + Mana + "\nArmor: " + Armor + "\nMagic Resist: " + MagicResist + "\n");
         }
 
+        public void DisplayStat(string type)
+        {
+            if (type == "Attack")
+                System.Console.WriteLine(attackDmg);
+            else if (type == "Health")
+                System.Console.WriteLine(health);
+            else if (type == "Name")
+                System.Console.WriteLine(name);
+        }
+
+        //champion creation
         public void CreateCustomChamp()
         {
             System.Console.WriteLine("What is your champion's name?");
@@ -70,10 +83,10 @@ namespace projects_and
         public void CreateRandomChamp(string[] nameList, Random rnd)
         {
             Name = nameList[rnd.Next(1, 32)];
-            AttackDmg = rnd.Next(0, 100);
-            Mana = rnd.Next(0, 150);
-            Armor = rnd.Next(0, 50);
-            Health = rnd.Next(0, 100);
+            AttackDmg = rnd.Next(60, 100);
+            Mana = rnd.Next(80, 150);
+            Armor = rnd.Next(25, 50);
+            Health = rnd.Next(80, 100);
             MagicResist = rnd.Next(0, 50);
         }
     }

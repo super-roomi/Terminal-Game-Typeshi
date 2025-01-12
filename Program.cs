@@ -38,7 +38,6 @@ class Program
         {
             //random player stats
             newchamp.CreateRandomChamp(nameList, rnd);
-
             npc.createNpc(nameList, rnd);
 
             System.Console.WriteLine("Please wait while your shahwani champion is being created");
@@ -54,10 +53,27 @@ class Program
         }
 
         //Actual Game Begins here
-        while (newchamp.Health > 0)
+        while (newchamp.Health > 0 && npc.Health > 0)
         {
+            System.Console.WriteLine("Time to strike your opponent! Type STRIKE or NVM to let him/her strike first");
+            string? response = Console.ReadLine();
 
+            if (response == "STRIKE")
+            {
+
+                newchamp.Attack(newchamp, npc);
+                response = "";
+            }
+            else
+            {
+                npc.Attack();
+                response = "";
+            }
         }
+        if (newchamp.Health < 0)
+            System.Console.WriteLine("You lose!");
+        else
+            System.Console.WriteLine("Congratulations! You won vs: " + npc.Name);
 
     }
 

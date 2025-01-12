@@ -47,6 +47,16 @@ namespace projects_and
 
         }
 
+        public void DisplayStat(string type)
+        {
+            if (type == "Attack")
+                System.Console.WriteLine(attackDmg);
+            else if (type == "Health")
+                System.Console.WriteLine(health);
+            else if (type == "Name")
+                System.Console.WriteLine(name);
+        }
+
         public void createNpc(string[] nameList, Random rnd)
         {
             Name = nameList[rnd.Next(1, 32)];
