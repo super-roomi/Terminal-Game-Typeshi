@@ -12,3 +12,4 @@
 /Users/karam/Documents/Programming/Csharp Projects/projects and/obj/Debug/net8.0/projects and.pdb
 /Users/karam/Documents/Programming/Csharp Projects/projects and/obj/Debug/net8.0/projects and.genruntimeconfig.cache
 /Users/karam/Documents/Programming/Csharp Projects/projects and/obj/Debug/net8.0/ref/projects and.dll
+/Users/karam/Documents/Programming/Csharp Projects/projects and/obj/Debug/net8.0/projects and.sourcelink.json
