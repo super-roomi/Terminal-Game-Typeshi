@@ -4,9 +4,10 @@ class Program
 {
     static void Main(string[] args)
     {
+        //greeting
+        System.Console.WriteLine("Welcome to League of Better!");
+        Thread.Sleep(2000);
         //variables
-        bool game = true;
-        string userChoice = "";
         string[] nameList = { "Zynera", "Kaelith", "Tharic", "Vylora", "Drevan", "Lirath", "Sylvex", "Marathis", "Tyvanna", "Kynra", "Velric", "Shyvael", "Arminth", "Zorath", "Lysara", "Eryndal", "Vexros", "Nythera", "Xalric", "Corvyn", "Myriss", "Kalthor", "Zivara", "Renyx", "Talyra", "Fyrion", "Zeryn", "Vorathis", "Quinza", "Ryvorn", "Calyx", "Nythria" };
 
         //objects
@@ -18,39 +19,20 @@ class Program
         Champion champion = new Champion(npc);
         Npc npcc = new Npc(newchamp);
 
-        //Choice Handling
-        CenterText("Would you like to create your own champion? Or gamble to see if you have the better stats?\nType 'choose' to pick your own, anything else will be considered random");
-        userChoice = Console.ReadLine();
+        //assign stats
+        newchamp.CreateRandomChamp(nameList, rnd);
+        npc.CreateRandomChamp(nameList, rnd);
 
-        //Champion Creation Flow
-        if (userChoice.ToLower() == "choose")
-        {
-            newchamp.CreateCustomChamp();
-            npc.createNpc(nameList, rnd);
+        System.Console.WriteLine("Please wait while your shahwani champion is being created");
+        Console.Clear();
+        LoadingAnimation(3300);
 
-            System.Console.WriteLine("Your champion has the following stats:\n");
-            newchamp.DisplayStats();
+        System.Console.WriteLine("Your random champion has the following stats:");
+        newchamp.DisplayStats();
 
-            System.Console.WriteLine("Your enemy has the following stats:\n");
-            npc.DisplayStats();
-        }
-        else
-        {
-            //random player stats
-            newchamp.CreateRandomChamp(nameList, rnd);
-            npc.createNpc(nameList, rnd);
+        System.Console.WriteLine("Your opponent has the following stats: ");
+        npc.DisplayStats();
 
-            System.Console.WriteLine("Please wait while your shahwani champion is being created");
-            Console.Clear();
-            LoadingAnimation(3300);
-
-            System.Console.WriteLine("Your random champion has the following stats:");
-            newchamp.DisplayStats();
-
-            System.Console.WriteLine("Your opponent has the following stats: ");
-            npc.DisplayStats();
-
-        }
 
         //Actual Game Begins here
         while (newchamp.Health > 0 && npc.Health > 0)
@@ -61,12 +43,12 @@ class Program
             if (response == "STRIKE")
             {
 
-                newchamp.Attack(newchamp, npc);
+                newchamp.Attack(newchamp, npc, 0);
                 response = "";
             }
             else
             {
-                npc.Attack();
+                npc.Attack(newchamp, npc, 1);
                 response = "";
             }
         }

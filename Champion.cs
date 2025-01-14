@@ -36,10 +36,17 @@ namespace projects_and
             this.npc = npc;
         }
 
-        public void Attack(Champion champ, Npc npc)
+        public void Attack(Champion champ, Npc npc, int flag)
         {
-            npc.Health = npc.Health - champ.AttackDmg;
-            System.Console.WriteLine("You dealt: " + champ.attackDmg + "\nHis/her health is now: " + npc.Health);
+            if (flag == 0)
+            {
+                npc.Health = npc.Health - champ.AttackDmg;
+                System.Console.WriteLine("You dealt: " + champ.attackDmg + "\nHis/her health is now: " + npc.Health);
+            }
+            else if (flag == 1)
+            {
+                System.Console.WriteLine("The NPC dealt: " + attackDmg + "\nYour health is now: " + (attackDmg - Health));
+            }
         }
 
         //Stat printing
@@ -59,7 +66,7 @@ namespace projects_and
         }
 
         //champion creation
-        public void CreateCustomChamp()
+        public void CreateCustomChamp(string[] nameList)
         {
             System.Console.WriteLine("What is your champion's name?");
             Name = Console.ReadLine();
