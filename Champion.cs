@@ -10,6 +10,8 @@ namespace projects_and
         Npc npc;
 
         public string Name { get; set; }
+        public string[] Abilities { get; set; }
+        public int AbilityPower { get; set; }
         public int Health { get; set; }
         public int Mana { get; set; }
         public int Armor { get; set; }
@@ -29,18 +31,29 @@ namespace projects_and
             this.npc = npc;
         }
 
-        public void Attack(Champion champ, Npc npc, int flag)
+        public void Attack(Champion champ, Npc npc, int flag, bool ability = false)
         {
             if (flag == 0)
             {
-                npc.Health = npc.Health - champ.AttackDmg;
-                System.Console.WriteLine("You dealt: " + champ.AttackDmg + "\nHis/her health is now: " + npc.Health);
+                if (ability)
+                {
+                    npc.Health = npc.Health - champ.AbilityPower;
+
+                    System.Console.WriteLine("You dealt: " + champ.AbilityPower + "\nHis/her health is now: " + npc.Health);
+                }
+                else
+                {
+                    npc.Health = npc.Health - champ.AttackDmg;
+                    System.Console.WriteLine("You dealt: " + champ.AttackDmg + "\nHis/her health is now: " + npc.Health);
+                }
             }
             else if (flag == 1)
             {
+                champ.Health = champ.Health - npc.AttackDmg;
                 System.Console.WriteLine("The NPC dealt: " + AttackDmg + "\nYour health is now: " + (AttackDmg - Health));
             }
         }
+
 
         //Stat printing
         public void DisplayStats()
@@ -58,29 +71,7 @@ namespace projects_and
                 System.Console.WriteLine(Name);
         }
 
-        //champion creation
-        public void CreateCustomChamp(string[] nameList)
-        {
-            System.Console.WriteLine("What is your champion's name?");
-            Name = Console.ReadLine();
-
-            System.Console.WriteLine("How much health does your champion have? Out of 100?");
-            Health = int.Parse(Console.ReadLine());
-
-            System.Console.WriteLine("How much attack damage does he/she deal? Out of 100?");
-            AttackDmg = int.Parse(Console.ReadLine());
-
-            System.Console.WriteLine("How much mana does he/she have? Out of 200?");
-            Mana = int.Parse(Console.ReadLine());
-
-            System.Console.WriteLine("How much armor does he/she have? Out of 50?");
-            Armor = int.Parse(Console.ReadLine());
-
-            System.Console.WriteLine("How much Magic Resist does he/she have? Out of 50?");
-            MagicResist = int.Parse(Console.ReadLine());
-        }
-
-        public void CreateRandomChamp(string[] nameList, Random rnd)
+        public void CreateChampion(string[] nameList, string[] abilities, Random rnd)
         {
             Name = nameList[rnd.Next(1, 32)];
             AttackDmg = rnd.Next(60, 100);
@@ -88,6 +79,10 @@ namespace projects_and
             Armor = rnd.Next(25, 50);
             Health = rnd.Next(80, 100);
             MagicResist = rnd.Next(0, 50);
+
+            Abilities[0] = abilities[rnd.Next(0, abilities.Length)];
+            Abilities[1] = abilities[rnd.Next(0, abilities.Length)];
+            AbilityPower = rnd.Next(40, 70);
         }
     }
 }
