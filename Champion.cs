@@ -9,25 +9,18 @@ namespace projects_and
     {
         Npc npc;
 
-        private string name;
-        private int health;
-        private int mana;
-        private int armor;
-        private int magicResist;
-        private int attackDmg;
-
-        public string Name { get => name; set => name = value; }
-        public int Health { get => health; set => health = value; }
-        public int Mana { get => mana; set => mana = value; }
-        public int Armor { get => armor; set => armor = value; }
-        public int MagicResist { get => magicResist; set => magicResist = value; }
-        public int AttackDmg { get => attackDmg; set => attackDmg = value; }
+        public string Name { get; set; }
+        public int Health { get; set; }
+        public int Mana { get; set; }
+        public int Armor { get; set; }
+        public int MagicResist { get; set; }
+        public int AttackDmg { get; set; }
 
         //For main to create objects
         public Champion()
         {
             System.Console.WriteLine("Champion Created!");
-            name = "idk";
+            Name = "idk";
         }
 
         //Just to get the Npc object without having infinite recursion
@@ -41,11 +34,11 @@ namespace projects_and
             if (flag == 0)
             {
                 npc.Health = npc.Health - champ.AttackDmg;
-                System.Console.WriteLine("You dealt: " + champ.attackDmg + "\nHis/her health is now: " + npc.Health);
+                System.Console.WriteLine("You dealt: " + champ.AttackDmg + "\nHis/her health is now: " + npc.Health);
             }
             else if (flag == 1)
             {
-                System.Console.WriteLine("The NPC dealt: " + attackDmg + "\nYour health is now: " + (attackDmg - Health));
+                System.Console.WriteLine("The NPC dealt: " + AttackDmg + "\nYour health is now: " + (AttackDmg - Health));
             }
         }
 
@@ -58,11 +51,11 @@ namespace projects_and
         public void DisplayStat(string type)
         {
             if (type == "Attack")
-                System.Console.WriteLine(attackDmg);
+                System.Console.WriteLine(AttackDmg);
             else if (type == "Health")
-                System.Console.WriteLine(health);
+                System.Console.WriteLine(Health);
             else if (type == "Name")
-                System.Console.WriteLine(name);
+                System.Console.WriteLine(Name);
         }
 
         //champion creation
